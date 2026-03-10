@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Urban Caps | Catálogo Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    :root {
+      --bg: #0f0f12;
+      --bg-soft: #17171d;
+      --card: #1f1f27;
+      --text: #ffffff;
+      --muted: #b7b7c9;
+      --primary: #ff5f1f;
+      --primary-2: #ff874f;
+      --success: #25d366;
+      --call: #007bff;
+      --maps: #ff3b3b;
+      --shadow: 0 15px 35px rgba(0,0,0,0.25);
+      --radius: 22px;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(255,95,31,0.18), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(255,135,79,0.15), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+    }
+
+    .hero {
+      padding: 30px 0 60px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-text h1 {
+      font-size: 1.2rem;
+      line-height: 1;
+      font-weight: 800;
+    }
+
+    .brand-text p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .main-hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 40px;
+      padding-top: 30px;
+    }
+
+    .hero-copy h2 {
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .hero-copy h2 span {
+      color: var(--primary);
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 580px;
+      margin-bottom: 26px;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.04);
+      color: white;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -60px;
+      background: radial-gradient(circle, rgba(255,95,31,0.22), transparent 45%);
+      z-index: 0;
+    }
+
+    .hero-image {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      min-height: 380px;
+      border-radius: 24px;
+      background:
+        linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)),
+        url("https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=900&q=80") center/cover;
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+    }
+
+    .hero-badge {
+      background: rgba(15,15,18,0.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 18px;
+      border-radius: 18px;
+      max-width: 290px;
+    }
+
+    .hero-badge strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .hero-badge span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .section {
+      padding: 28px 0 50px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-title h3 {
+      font-size: 2rem;
+      font-weight: 800;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: 0.28s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card-image {
+      height: 260px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(15,15,18,0.8);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .card-body h4 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .card-body p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      min-height: 66px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary-2);
+    }
+
+    .mini-btn {
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .mini-btn:hover {
+      opacity: 0.92;
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .benefit {
+      background: var(--bg-soft);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .benefit .icon {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+
+    .benefit h4 {
+      margin-bottom: 10px;
+      font-size: 1.08rem;
+    }
+
+    .benefit p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .contact-section {
+      padding-bottom: 90px;
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, rgba(255,95,31,0.15), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-box h3 {
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 650px;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .whatsapp {
+      background: var(--success);
+      color: white;
+    }
+
+    .call {
+      background: var(--call);
+      color: white;
+    }
+
+    .maps {
+      background: var(--maps);
+      color: white;
+    }
+
+    .floating-actions {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 999;
+    }
+
+    .float-btn {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 1.35rem;
+      box-shadow: var(--shadow);
+      transition: 0.25s ease;
+    }
+
+    .float-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .footer {
+      padding: 30px 0 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1100px) {
+      .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .main-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: auto;
+      }
+
+      .benefits {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-title {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .catalog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy h2 {
+        font-size: 2.2rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .action-buttons {
+        width: 100%;
+      }
+
+      .action-buttons .btn {
+        width: 100%;
+      }
+
+      .hero-image {
+        min-height: 320px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">
+          <div class="brand-logo">UC</div>
+          <div class="brand-text">
+            <h1>Urban Caps</h1>
+            <p>Catálogo digital de cachuchas</p>
+          </div>
+        </div>
+
+        <div class="cta-group">
+          <a class="btn btn-outline" href="https://maps.app.goo.gl/Wk78oyDtNKZS2opB8" target="_blank">📍 Ubicación</a>
+          <a class="btn whatsapp" href="https://wa.me/524495820032?text=%C2%A1Quiero%20m%C3%A1s%20informaci%C3%B3n!" target="_blank">💬 WhatsApp</a>
+          <a class="btn call" href="tel:4491386873">📞 Llamar</a>
+        </div>
+      </div>
+
+      <div class="main-hero">
+        <div class="hero-copy">
+          <h2>Las cachuchas que elevan tu <span>estilo urbano</span></h2>
+          <p>
+            Descubre modelos modernos, clásicos y premium para combinar con tu outfit.
+            Compra fácil, pregunta por disponibilidad y contáctanos en un clic desde este catálogo digital.
+          </p>
+
+          <div class="cta-group">
+            <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
+            <a class="btn btn-outline" href="https://wa.me/524495820032?text=%C2%A1Quiero%20m%C3%A1s%20informaci%C3%B3n!" target="_blank">Cotizar ahora</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-image">
+            <div class="hero-badge">
+              <strong>Nuevos modelos cada semana</strong>
+              <span>Promociona tus productos con un catálogo digital moderno, atractivo y listo para vender.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="catalogo">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>Catálogo destacado</h3>
+        </div>
+        <p>
+          Este es un ejemplo visual de cómo puede verse un catálogo digital para una tienda local.
+          Puedes cambiar productos, colores, precios, fotos y enlaces según el negocio.
+        </p>
+      </div>
+
+      <div class="catalog-grid">
+        <article class="card">
+          <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80');">
+            <span class="tag">Nueva</span>
+          </div>
+          <div class="card-body">
+            <h4>Cachucha Black Street</h4>
+            <p>Diseño urbano minimalista, ajuste cómodo y acabado premium para uso diario.</p>
+            <div class="price-row">
+              <span class="price">$299</span>
+            </div>
+            <a class="mini-btn" href="https://wa.me/524495820032?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20la%20Cachucha%20Black%20Street" target="_blank">Pedir por WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80');">
+            <span class="tag">Top ventas</span>
+          </div>
+          <div class="card-body">
+            <h4>Cachucha Urban Classic</h4>
+            <p>Modelo clásico con visera curva, ideal para combinar con cualquier estilo casual.</p>
+            <div class="price-row">
+              <span class="price">$249</span>
+            </div>
+            <a class="mini-btn" href="https://wa.me/524495820032?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20la%20Cachucha%20Urban%20Classic" target="_blank">Pedir por WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=80');">
+            <span class="tag">Premium</span>
+          </div>
+          <div class="card-body">
+            <h4>Cachucha Snapback Pro</h4>
+            <p>Estilo moderno con ajuste snapback, estructura firme y presencia más llamativa.</p>
+            <div class="price-row">
+              <span class="price">$349</span>
+            </div>
+            <a class="mini-btn" href="https://wa.me/524495820032?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20la%20Cachucha%20Snapback%20Pro" target="_blank">Pedir por WhatsApp</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image" style="background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80');">
+            <span class="tag">Edición especial</span>
+          </div>
+          <div class="card-body">
+            <h4>Cachucha Street Limited</h4>
+            <p>Para quienes buscan un look más exclusivo, con acabados distintivos y gran estilo.</p>
+            <div class="price-row">
+              <span class="price">$399</span>
+            </div>
+            <a class="mini-btn" href="https://wa.me/524495820032?text=Hola,%20quiero%20informaci%C3%B3n%20sobre%20la%20Cachucha%20Street%20Limited" target="_blank">Pedir por WhatsApp</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h3>¿Por qué funciona este catálogo?</h3>
+        </div>
+        <p>
+          Porque no solo muestra productos: también facilita el contacto inmediato con el cliente y reduce fricción en la compra.
+        </p>
+      </div>
+
+      <div class="benefits">
+        <div class="benefit">
+          <div class="icon">⚡</div>
+          <h4>Venta más rápida</h4>
+          <p>El cliente ve el producto, el precio y puede escribir por WhatsApp en segundos, sin perder tiempo ni interés.</p>
+        </div>
+
+        <div class="benefit">
+          <div class="icon">📱</div>
+          <h4>Se ve bien en celular</h4>
+          <p>La mayoría de clientes lo abrirán desde su teléfono. Este diseño está pensado para verse moderno y claro en móvil.</p>
+        </div>
+
+        <div class="benefit">
+          <div class="icon">📍</div>
+          <h4>Contacto directo</h4>
+          <p>Incluye botones a ubicación, llamada y WhatsApp para que el negocio reciba más consultas y cierre más ventas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact-section">
+    <div class="container">
+      <div class="contact-box">
+        <div>
+          <h3>¿Te gustó este ejemplo?</h3>
+          <p>
+            Este mismo formato puede adaptarse para tiendas, menús digitales, catálogos, barberías, refaccionarias,
+            imprentas, papelerías, boutiques y muchos más negocios locales.
+          </p>
+        </div>
+
+        <div class="action-buttons">
+          <a class="btn maps" href="https://maps.app.goo.gl/Wk78oyDtNKZS2opB8" target="_blank">📍 Cómo llegar</a>
+          <a class="btn whatsapp" href="https://wa.me/524495820032?text=%C2%A1Quiero%20m%C3%A1s%20informaci%C3%B3n!" target="_blank">💬 Enviar mensaje</a>
+          <a class="btn call" href="tel:4491386873">📞 Llamar ahora</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="floating-actions">
+    <a class="float-btn whatsapp" href="https://wa.me/524495820032?text=%C2%A1Quiero%20m%C3%A1s%20informaci%C3%B3n!" target="_blank" title="WhatsApp">💬</a>
+    <a class="float-btn maps" href="https://maps.app.goo.gl/Wk78oyDtNKZS2opB8" target="_blank" title="Ubicación">📍</a>
+    <a class="float-btn call" href="tel:4491386873" title="Llamar">📞</a>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      Catálogo digital de ejemplo para tienda local de cachuchas.
+    </div>
+  </footer>
+
+</body>
+</html>
