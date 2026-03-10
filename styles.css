@@ -532,6 +532,12 @@ a {
   z-index: 999;
 }
 
+.float-btn svg {
+  width: 26px;
+  height: 26px;
+  display: block;
+}
+
 .float-btn {
   width: 58px;
   height: 58px;
