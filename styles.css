@@ -10,6 +10,8 @@
   --primary-dark: #1d4ed8;
   --accent: #0ea5e9;
   --success: #16a34a;
+  --maps: #ea4335;
+  --call: #0f766e;
   --shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
   --radius: 20px;
   --max: 1120px;
@@ -178,7 +180,6 @@ a {
 .btn-sm {
   padding: 10px 16px;
   border-radius: 12px;
-  color: white;
 }
 
 .btn-small {
@@ -291,13 +292,17 @@ a {
   color: var(--text-soft);
 }
 
-.cards {
+.cards,
+.examples-grid,
+.plans-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 22px;
 }
 
-.card {
+.card,
+.example-card,
+.plan-card {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -305,17 +310,79 @@ a {
   box-shadow: 0 14px 34px rgba(15, 23, 42, 0.05);
 }
 
-.card h3 {
+.card h3,
+.example-card h3,
+.plan-card h3 {
   margin-top: 0;
 }
 
-.card p {
+.card p,
+.example-card p,
+.plan-card p {
   color: var(--text-soft);
 }
 
-.card ul {
+.card ul,
+.plan-card ul {
   margin: 18px 0 0;
   padding-left: 18px;
+}
+
+.example-card {
+  padding: 18px;
+}
+
+.example-media {
+  width: 100%;
+  height: 260px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #e2e8f0;
+  border: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+
+.example-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.example-actions {
+  margin-top: 14px;
+}
+
+.plan-card {
+  position: relative;
+}
+
+.plan-card.featured {
+  border: 2px solid var(--primary);
+  transform: translateY(-6px);
+}
+
+.plan-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: var(--primary-dark);
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.price-note {
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: var(--text-soft);
 }
 
 .benefits-grid {
@@ -377,6 +444,33 @@ a {
   color: var(--text-soft);
 }
 
+.faq-list {
+  display: grid;
+  gap: 14px;
+}
+
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+
+.faq-item summary {
+  font-weight: 800;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item p {
+  margin: 12px 0 0;
+  color: var(--text-soft);
+}
+
 .cta-band {
   padding-top: 0;
 }
@@ -427,9 +521,52 @@ a {
   margin-bottom: 8px;
 }
 
+/* botones flotantes */
+.floating-actions {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 999;
+}
+
+.float-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.22);
+  transition: 0.2s ease;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+.float-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.float-btn.whatsapp {
+  background: #25d366;
+}
+
+.float-btn.maps {
+  background: var(--maps);
+}
+
+.float-btn.call {
+  background: var(--call);
+}
+
 @media (max-width: 980px) {
   .hero-grid,
   .cards,
+  .examples-grid,
+  .plans-grid,
   .benefits-grid,
   .steps,
   .trust-grid {
@@ -451,6 +588,8 @@ a {
 
   .hero-grid,
   .cards,
+  .examples-grid,
+  .plans-grid,
   .benefits-grid,
   .steps,
   .trust-grid,
@@ -464,5 +603,16 @@ a {
 
   .cta-box {
     padding: 28px;
+  }
+
+  .floating-actions {
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .float-btn {
+    width: 54px;
+    height: 54px;
+    font-size: 0.9rem;
   }
 }
