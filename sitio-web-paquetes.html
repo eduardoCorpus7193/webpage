@@ -1,933 +1,463 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Propuesta de Servicios Web</title>
-  <meta
-    name="description"
-    content="Landing page de servicios web: landing page, sitio web, tienda online, mantenimiento y SEO."
-  />
-  <style>
-    :root {
-      --bg: #0b1220;
-      --bg-soft: #111a2e;
-      --card: #131f36;
-      --card-2: #17233d;
-      --text: #f4f7fb;
-      --muted: #a9b5c9;
-      --line: rgba(255, 255, 255, 0.08);
-      --primary: #37c0e9;
-      --secondary: #a51f79;
-      --success: #79f2b0;
-      --warning: #ffd166;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
-      --radius: 22px;
-      --radius-sm: 14px;
-      --max: 1180px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(55, 192, 233, 0.13), transparent 28%),
-        radial-gradient(circle at top right, rgba(165, 31, 121, 0.15), transparent 22%),
-        linear-gradient(180deg, #09111d 0%, #0b1220 100%);
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    .container {
-      width: min(100% - 32px, var(--max));
-      margin: 0 auto;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 14px;
-      border: 1px solid rgba(55, 192, 233, 0.25);
-      background: rgba(55, 192, 233, 0.08);
-      color: #d7f6ff;
-      border-radius: 999px;
-      font-size: 0.92rem;
-      font-weight: 700;
-    }
-
-    .accent {
-      color: var(--primary);
-    }
-
-    .accent-2 {
-      color: #ff77c9;
-    }
-
-    .section {
-      padding: 78px 0;
-    }
-
-    .section-title {
-      font-size: clamp(1.9rem, 3vw, 3rem);
-      line-height: 1.15;
-      margin: 0 0 14px;
-      font-weight: 800;
-    }
-
-    .section-subtitle {
-      max-width: 780px;
-      color: var(--muted);
-      font-size: 1.02rem;
-      margin: 0 0 30px;
-    }
-
-    /* Header */
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(12px);
-      background: rgba(8, 14, 25, 0.72);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .nav {
-      min-height: 74px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: 0.3px;
-    }
-
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background:
-        linear-gradient(135deg, rgba(55, 192, 233, 0.25), rgba(165, 31, 121, 0.3)),
-        #0f1b31;
-      border: 1px solid rgba(255,255,255,.08);
-      display: grid;
-      place-items: center;
-      box-shadow: var(--shadow);
-      font-weight: 900;
-      color: var(--text);
-    }
-
-    .menu {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .menu a {
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 0.96rem;
-    }
-
-    .menu a:hover {
-      color: var(--text);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      min-height: 50px;
-      padding: 0 20px;
-      border-radius: 999px;
-      font-weight: 800;
-      transition: 0.2s ease;
-      border: 1px solid transparent;
-      cursor: pointer;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), #72dbfb);
-      color: #06111f;
-      box-shadow: 0 10px 22px rgba(55, 192, 233, 0.25);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.1);
-      color: var(--text);
-    }
-
-    /* Hero */
-    .hero {
-      padding: 72px 0 54px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.95fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.3rem, 5vw, 4.5rem);
-      line-height: 1.05;
-      margin: 18px 0 16px;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-    }
-
-    .hero p {
-      color: var(--muted);
-      font-size: 1.08rem;
-      max-width: 720px;
-      margin: 0 0 22px;
-    }
-
-    .check-list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(220px, 1fr));
-      gap: 12px;
-      margin: 28px 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .check-list li {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px 16px;
-      color: #eaf4ff;
-      font-weight: 700;
-    }
-
-    .hero-card {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)),
-        var(--card);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before,
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(20px);
-      opacity: 0.5;
-    }
-
-    .hero-card::before {
-      width: 150px;
-      height: 150px;
-      background: rgba(55, 192, 233, 0.25);
-      top: -40px;
-      right: -30px;
-    }
-
-    .hero-card::after {
-      width: 130px;
-      height: 130px;
-      background: rgba(165, 31, 121, 0.3);
-      bottom: -40px;
-      left: -25px;
-    }
-
-    .price-preview {
-      display: grid;
-      gap: 14px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .mini-card {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 16px;
-    }
-
-    .mini-card h3 {
-      margin: 0 0 6px;
-      font-size: 1rem;
-    }
-
-    .mini-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.96rem;
-    }
-
-    .mini-price {
-      display: inline-block;
-      margin-top: 10px;
-      font-weight: 900;
-      color: var(--primary);
-    }
-
-    /* Cards */
-    .grid {
-      display: grid;
-      gap: 22px;
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .card {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)),
-        var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-    }
-
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 1.2rem;
-    }
-
-    .card p {
-      margin: 0 0 16px;
-      color: var(--muted);
-    }
-
-    .features {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: grid;
-      gap: 10px;
-    }
-
-    .features li {
-      position: relative;
-      padding-left: 18px;
-      color: #e9f2ff;
-    }
-
-    .features li::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      position: absolute;
-      left: 0;
-      top: 11px;
-    }
-
-    /* Pricing */
-    .pricing-card {
-      position: relative;
-    }
-
-    .pricing-card.popular {
-      border-color: rgba(55, 192, 233, 0.45);
-      box-shadow: 0 12px 34px rgba(55, 192, 233, 0.12);
-    }
-
-    .tag {
-      position: absolute;
-      top: 18px;
-      right: 18px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 800;
-      background: rgba(55, 192, 233, 0.12);
-      border: 1px solid rgba(55, 192, 233, 0.28);
-      color: #dff9ff;
-    }
-
-    .price {
-      font-size: 2rem;
-      font-weight: 900;
-      margin: 10px 0 4px;
-      color: var(--text);
-    }
-
-    .price small {
-      color: var(--muted);
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
-
-    .price-note {
-      color: var(--muted);
-      margin-bottom: 16px;
-      min-height: 44px;
-    }
-
-    /* process */
-    .step {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-
-    .step-num {
-      flex: 0 0 46px;
-      width: 46px;
-      height: 46px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      background: linear-gradient(135deg, rgba(55,192,233,.18), rgba(165,31,121,.2));
-      border: 1px solid rgba(255,255,255,.1);
-    }
-
-    /* FAQ */
-    details {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 18px 20px;
-    }
-
-    details + details {
-      margin-top: 14px;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: 800;
-      list-style: none;
-    }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    details p {
-      color: var(--muted);
-      margin: 12px 0 0;
-    }
-
-    /* CTA */
-    .cta {
-      background:
-        radial-gradient(circle at top right, rgba(55,192,233,0.14), transparent 28%),
-        radial-gradient(circle at bottom left, rgba(165,31,121,0.18), transparent 24%),
-        var(--bg-soft);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 34px;
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-
-    .cta p {
-      color: var(--muted);
-      max-width: 740px;
-      margin: 0 auto 20px;
-    }
-
-    footer {
-      padding: 36px 0 60px;
-      color: var(--muted);
-    }
-
-    .footer-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      flex-wrap: wrap;
-      border-top: 1px solid var(--line);
-      padding-top: 24px;
-    }
-
-    /* responsive */
-    @media (max-width: 980px) {
-      .hero-grid,
-      .grid-3,
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
-
-      .check-list {
-        grid-template-columns: 1fr;
-      }
-
-      .menu {
-        display: none;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero {
-        padding-top: 48px;
-      }
-
-      .section {
-        padding: 62px 0;
-      }
-
-      .card,
-      .hero-card,
-      .cta {
-        padding: 20px;
-      }
-
-      .btn {
-        width: 100%;
-      }
-
-      .hero-actions {
-        display: grid;
-        gap: 12px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Propuesta de Servicios Web</title>
+    <meta name="description"
+        content="Landing page de servicios web: landing page, sitio web, tienda online, mantenimiento y SEO." />
+    <link rel="stylesheet" href="styles-sitio-web.css" />
 </head>
+
 <body>
-    
-  <header class="header">
-    <div class="container nav">
-      <a href="#" class="brand">
-        <img src="Joedco-HD.png" alt="logo" width="50px">
-        <span>Joedco - dev</span>
-      </a>
 
-      <nav class="menu">
-        <a href="#servicios">Servicios</a>
-        <a href="#precios">Precios</a>
-        <a href="#seo">SEO</a>
-        <a href="#proceso">Proceso</a>
-        <a href="#faq">FAQ</a>
-      </nav>
+    <!-- Botones flotantes -->
+    <div class="floating-actions">
+        <a class="float-btn whatsapp" href="https://wa.me/524495820032?text=%C2%A1Quiero%20m%C3%A1s%20informaci%C3%B3n!"
+            target="_blank" aria-label="WhatsApp" title="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor"
+                    d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.61 2 2.2 6.41 2.2 11.83c0 1.74.45 3.44 1.31 4.95L2 22l5.38-1.41a9.8 9.8 0 0 0 4.65 1.18h.01c5.42 0 9.83-4.41 9.83-9.83a9.77 9.77 0 0 0-2.82-7.03Zm-7.02 15.2h-.01a8.13 8.13 0 0 1-4.14-1.13l-.3-.18-3.19.84.85-3.11-.2-.32a8.14 8.14 0 0 1-1.26-4.38c0-4.5 3.66-8.16 8.17-8.16 2.18 0 4.23.85 5.76 2.39a8.1 8.1 0 0 1 2.38 5.77c0 4.5-3.66 8.16-8.16 8.16Zm4.48-6.12c-.25-.12-1.47-.72-1.69-.8-.23-.08-.39-.12-.56.12-.16.25-.64.8-.78.96-.14.16-.29.18-.54.06-.25-.12-1.04-.38-1.98-1.2-.73-.65-1.23-1.45-1.37-1.69-.14-.25-.02-.38.1-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42h-.48c-.16 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.16 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.19.21-.59.21-1.09.14-1.19-.06-.1-.23-.16-.48-.29Z" />
+            </svg>
+        </a>
 
-      <a class="btn btn-primary" href="https://wa.me/524495820032?text=Hola,%20quiero%20cotizar%20un%20proyecto%20web" target="_blank" rel="noopener noreferrer">
-        Cotizar proyecto
-      </a>
+        <a class="float-btn maps" href="https://maps.app.goo.gl/Wk78oyDtNKZS2opB8" target="_blank"
+            aria-label="Ubicación" title="Ubicación">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor"
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" />
+            </svg>
+        </a>
+
+        <a class="float-btn call" href="tel:4491386873" aria-label="Llamar" title="Llamar">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor"
+                    d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.3 21 3 13.7 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.58.11.35.03.74-.25 1.01l-2.2 2.2Z" />
+            </svg>
+        </a>
     </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <span class="badge">Soluciones web para negocios y marcas</span>
-          <h1>
-            Precios claros para
-            <span class="accent">landing page</span>,
-            <span class="accent-2">sitio web</span>,
-            tienda online, mantenimiento y SEO
-          </h1>
-          <p>
-            Desarrollo páginas modernas, rápidas y pensadas para convertir visitas en mensajes, llamadas y ventas.
-            Aquí te comparto qué incluye cada servicio y el rango de inversión recomendado.
-          </p>
 
-          <ul class="check-list">
-            <li>✅ Diseño profesional y responsivo</li>
-            <li>✅ Botones de WhatsApp y contacto</li>
-            <li>✅ Publicación y configuración básica</li>
-            <li>✅ Opción de mantenimiento y SEO</li>
-          </ul>
-
-          <div class="hero-actions" style="display:flex; gap:12px; flex-wrap:wrap;">
-            <a class="btn btn-primary" href="https://wa.me/524495820032?text=Hola,%20me%20interesa%20una%20cotizaci%C3%B3n" target="_blank" rel="noopener noreferrer">
-              Solicitar cotización
+    <header class="header">
+        <div class="container nav">
+            <a href="/" class="brand">
+                <img src="Joedco-HD.png" alt="logo" width="50px">
+                <span>Joedco - dev</span>
             </a>
-            <a class="btn btn-secondary" href="#precios">
-              Ver precios
+
+            <nav class="menu">
+                <a href="#servicios">Servicios</a>
+                <a href="#precios">Precios</a>
+                <a href="#seo">SEO</a>
+                <a href="#proceso">Proceso</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+
+            <a class="btn btn-primary"
+                href="https://wa.me/524495820032?text=Hola,%20quiero%20cotizar%20un%20proyecto%20web" target="_blank"
+                rel="noopener noreferrer">
+                Cotizar proyecto
             </a>
-          </div>
         </div>
+    </header>
 
-        <aside class="hero-card">
-          <div class="price-preview">
-            <div class="mini-card">
-              <h3>Landing Page</h3>
-              <p>Página de una sola estructura para campañas, captación y contacto rápido.</p>
-              <span class="mini-price">$3,500 – $5,000 MXN</span>
+    <main>
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <span class="badge">Soluciones web para negocios y marcas</span>
+                    <h1>
+                        Precios claros para
+                        <span class="accent">landing page</span>,
+                        <span class="accent-2">sitio web</span>,
+                        tienda online, mantenimiento y SEO
+                    </h1>
+                    <p>
+                        Desarrollo páginas modernas, rápidas y pensadas para convertir visitas en mensajes, llamadas y
+                        ventas.
+                        Aquí te comparto qué incluye cada servicio y el rango de inversión recomendado.
+                    </p>
+
+                    <ul class="check-list">
+                        <li>✅ Diseño profesional y responsivo</li>
+                        <li>✅ Botones de WhatsApp y contacto</li>
+                        <li>✅ Publicación y configuración básica</li>
+                        <li>✅ Opción de mantenimiento y SEO</li>
+                    </ul>
+
+                    <div class="hero-actions" style="display:flex; gap:12px; flex-wrap:wrap;">
+                        <a class="btn btn-primary"
+                            href="https://wa.me/524495820032?text=Hola,%20me%20interesa%20una%20cotizaci%C3%B3n"
+                            target="_blank" rel="noopener noreferrer">
+                            Solicitar cotización
+                        </a>
+                        <a class="btn btn-secondary" href="#precios">
+                            Ver precios
+                        </a>
+                    </div>
+                </div>
+
+                <aside class="hero-card">
+                    <div class="price-preview">
+                        <div class="mini-card">
+                            <h3>Landing Page</h3>
+                            <p>Página de una sola estructura para campañas, captación y contacto rápido.</p>
+                            <span class="mini-price">$3,500 – $5,000 MXN</span>
+                        </div>
+
+                        <div class="mini-card">
+                            <h3>Sitio Web Empresarial</h3>
+                            <p>Web completa para mostrar servicios, información y generar confianza.</p>
+                            <span class="mini-price">$6,500 – $9,000 MXN</span>
+                        </div>
+
+                        <div class="mini-card">
+                            <h3>Tienda Online</h3>
+                            <p>Catálogo, carrito, pagos y panel de administración según el alcance.</p>
+                            <span class="mini-price">$12,000 – $25,000 MXN</span>
+                        </div>
+                    </div>
+                </aside>
             </div>
+        </section>
 
-            <div class="mini-card">
-              <h3>Sitio Web Empresarial</h3>
-              <p>Web completa para mostrar servicios, información y generar confianza.</p>
-              <span class="mini-price">$6,500 – $9,000 MXN</span>
+        <section class="section" id="servicios">
+            <div class="container">
+                <h2 class="section-title">Servicios que puedo desarrollar</h2>
+                <p class="section-subtitle">
+                    Cada proyecto cambia según el objetivo del negocio. Por eso trabajo por alcance,
+                    funcionalidades y nivel de personalización.
+                </p>
+
+                <div class="grid grid-3">
+                    <article class="card">
+                        <h3>Landing Page</h3>
+                        <p>Ideal para campañas, promociones, captación de leads o presentar un servicio específico.</p>
+                        <ul class="features">
+                            <li>Diseño profesional de una sola página</li>
+                            <li>Adaptación a celular y tablet</li>
+                            <li>Botón de WhatsApp</li>
+                            <li>Formulario de contacto</li>
+                            <li>Integración con redes sociales</li>
+                            <li>CTA pensados para conversión</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h3>Sitio Web Empresarial</h3>
+                        <p>Para negocios que quieren una presencia digital más sólida, profesional y completa.</p>
+                        <ul class="features">
+                            <li>Hasta 5 secciones principales</li>
+                            <li>Inicio, servicios, nosotros y contacto</li>
+                            <li>Mapa de ubicación</li>
+                            <li>Formulario y WhatsApp</li>
+                            <li>Diseño responsivo</li>
+                            <li>Publicación del sitio</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h3>Tienda Online</h3>
+                        <p>Para vender productos o servicios con catálogo, pagos y control administrativo.</p>
+                        <ul class="features">
+                            <li>Catálogo de productos</li>
+                            <li>Carrito de compra</li>
+                            <li>Métodos de pago</li>
+                            <li>Panel de administración</li>
+                            <li>Diseño móvil</li>
+                            <li>Escalable según necesidades</li>
+                        </ul>
+                    </article>
+                </div>
             </div>
+        </section>
 
-            <div class="mini-card">
-              <h3>Tienda Online</h3>
-              <p>Catálogo, carrito, pagos y panel de administración según el alcance.</p>
-              <span class="mini-price">$12,000 – $25,000 MXN</span>
+        <section class="section" id="precios">
+            <div class="container">
+                <h2 class="section-title">Rangos de inversión</h2>
+                <p class="section-subtitle">
+                    Estos son rangos de referencia para darte una idea rápida. El precio exacto se define según
+                    el número de secciones, funciones, diseño y contenido.
+                </p>
+
+                <div class="grid grid-3">
+                    <article class="card pricing-card">
+                        <h3>Landing Page</h3>
+                        <div class="price">$3,500 – $5,000 <small>MXN</small></div>
+                        <div class="price-note">Para una sola página enfocada en conversión.</div>
+                        <ul class="features">
+                            <li>Diseño atractivo</li>
+                            <li>Sección informativa</li>
+                            <li>WhatsApp y formulario</li>
+                            <li>Integración con redes</li>
+                        </ul>
+                    </article>
+
+                    <article class="card pricing-card popular">
+                        <span class="tag">Más solicitado</span>
+                        <h3>Sitio Web Empresarial</h3>
+                        <div class="price">$6,500 – $9,000 <small>MXN</small></div>
+                        <div class="price-note">Ideal para negocios que quieren una web completa y profesional.</div>
+                        <ul class="features">
+                            <li>Hasta 5 secciones</li>
+                            <li>Diseño responsivo</li>
+                            <li>Mapa, formulario y redes</li>
+                            <li>Publicación incluida</li>
+                        </ul>
+                    </article>
+
+                    <article class="card pricing-card">
+                        <h3>Tienda Online</h3>
+                        <div class="price">$12,000 – $25,000 <small>MXN</small></div>
+                        <div class="price-note">Depende del número de productos, pagos, envíos y panel administrativo.
+                        </div>
+                        <ul class="features">
+                            <li>Catálogo y carrito</li>
+                            <li>Métodos de pago</li>
+                            <li>Administración de productos</li>
+                            <li>Escalable</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="grid grid-2" style="margin-top:22px;">
+                    <article class="card">
+                        <h3>Mantenimiento Mensual</h3>
+                        <div class="price">$1,000 – $2,500 <small>MXN / mes</small></div>
+                        <div class="price-note">Para mantener el sitio actualizado, seguro y funcionando correctamente.
+                        </div>
+                        <ul class="features">
+                            <li>Actualizaciones del sitio</li>
+                            <li>Cambios menores de contenido</li>
+                            <li>Revisión de enlaces y formularios</li>
+                            <li>Soporte técnico básico</li>
+                            <li>Optimización básica</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <h3>SEO Mensual</h3>
+                        <div class="price">$2,500 – $6,000 <small>MXN / mes</small></div>
+                        <div class="price-note">Se trabaja de forma continua para mejorar visibilidad y posicionamiento.
+                        </div>
+                        <ul class="features">
+                            <li>Optimización técnica básica</li>
+                            <li>Palabras clave</li>
+                            <li>Contenido y estructura</li>
+                            <li>Search Console y seguimiento</li>
+                            <li>Mejoras continuas</li>
+                        </ul>
+                    </article>
+                </div>
             </div>
-          </div>
-        </aside>
-      </div>
-    </section>
+        </section>
 
-    <section class="section" id="servicios">
-      <div class="container">
-        <h2 class="section-title">Servicios que puedo desarrollar</h2>
-        <p class="section-subtitle">
-          Cada proyecto cambia según el objetivo del negocio. Por eso trabajo por alcance,
-          funcionalidades y nivel de personalización.
-        </p>
+        <section class="section" id="seo">
+            <div class="container">
+                <h2 class="section-title">¿Cómo funciona el SEO?</h2>
+                <p class="section-subtitle">
+                    SEO significa optimización para motores de búsqueda. Su objetivo es ayudar a que tu página
+                    aparezca mejor posicionada en Google cuando una persona busca servicios, productos o soluciones
+                    relacionadas con tu negocio.
+                </p>
 
-        <div class="grid grid-3">
-          <article class="card">
-            <h3>Landing Page</h3>
-            <p>Ideal para campañas, promociones, captación de leads o presentar un servicio específico.</p>
-            <ul class="features">
-              <li>Diseño profesional de una sola página</li>
-              <li>Adaptación a celular y tablet</li>
-              <li>Botón de WhatsApp</li>
-              <li>Formulario de contacto</li>
-              <li>Integración con redes sociales</li>
-              <li>CTA pensados para conversión</li>
-            </ul>
-          </article>
+                <div class="grid grid-2">
+                    <article class="card">
+                        <h3>Qué se trabaja en SEO</h3>
+                        <ul class="features">
+                            <li>Investigación de palabras clave</li>
+                            <li>Títulos, descripciones y encabezados correctos</li>
+                            <li>Velocidad y experiencia móvil</li>
+                            <li>Estructura clara del contenido</li>
+                            <li>Optimización de imágenes</li>
+                            <li>Indexación en Google Search Console</li>
+                            <li>Enlaces internos y arquitectura del sitio</li>
+                        </ul>
+                    </article>
 
-          <article class="card">
-            <h3>Sitio Web Empresarial</h3>
-            <p>Para negocios que quieren una presencia digital más sólida, profesional y completa.</p>
-            <ul class="features">
-              <li>Hasta 5 secciones principales</li>
-              <li>Inicio, servicios, nosotros y contacto</li>
-              <li>Mapa de ubicación</li>
-              <li>Formulario y WhatsApp</li>
-              <li>Diseño responsivo</li>
-              <li>Publicación del sitio</li>
-            </ul>
-          </article>
+                    <article class="card">
+                        <h3>Qué debes saber antes de venderlo</h3>
+                        <ul class="features">
+                            <li>No es inmediato; toma tiempo</li>
+                            <li>Se trabaja mejor mes a mes</li>
+                            <li>Depende de la competencia del nicho</li>
+                            <li>No es solo “meter palabras clave”</li>
+                            <li>Debe combinar técnica + contenido + seguimiento</li>
+                            <li>Ayuda a atraer tráfico más calificado</li>
+                        </ul>
+                    </article>
+                </div>
 
-          <article class="card">
-            <h3>Tienda Online</h3>
-            <p>Para vender productos o servicios con catálogo, pagos y control administrativo.</p>
-            <ul class="features">
-              <li>Catálogo de productos</li>
-              <li>Carrito de compra</li>
-              <li>Métodos de pago</li>
-              <li>Panel de administración</li>
-              <li>Diseño móvil</li>
-              <li>Escalable según necesidades</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
+                <div class="grid grid-3" style="margin-top:22px;">
+                    <article class="card">
+                        <h3>SEO básico inicial</h3>
+                        <p>Se puede vender como configuración inicial para páginas nuevas.</p>
+                        <ul class="features">
+                            <li>Estructura básica SEO</li>
+                            <li>Meta títulos y descripciones</li>
+                            <li>Configuración inicial Search Console</li>
+                            <li>Optimización de velocidad básica</li>
+                        </ul>
+                    </article>
 
-    <section class="section" id="precios">
-      <div class="container">
-        <h2 class="section-title">Rangos de inversión</h2>
-        <p class="section-subtitle">
-          Estos son rangos de referencia para darte una idea rápida. El precio exacto se define según
-          el número de secciones, funciones, diseño y contenido.
-        </p>
+                    <article class="card">
+                        <h3>SEO mensual</h3>
+                        <p>Recomendado cuando el cliente quiere crecer y competir en Google.</p>
+                        <ul class="features">
+                            <li>Análisis y ajustes continuos</li>
+                            <li>Nuevas páginas o contenido</li>
+                            <li>Seguimiento de keywords</li>
+                            <li>Mejoras técnicas periódicas</li>
+                        </ul>
+                    </article>
 
-        <div class="grid grid-3">
-          <article class="card pricing-card">
-            <h3>Landing Page</h3>
-            <div class="price">$3,500 – $5,000 <small>MXN</small></div>
-            <div class="price-note">Para una sola página enfocada en conversión.</div>
-            <ul class="features">
-              <li>Diseño atractivo</li>
-              <li>Sección informativa</li>
-              <li>WhatsApp y formulario</li>
-              <li>Integración con redes</li>
-            </ul>
-          </article>
-
-          <article class="card pricing-card popular">
-            <span class="tag">Más solicitado</span>
-            <h3>Sitio Web Empresarial</h3>
-            <div class="price">$6,500 – $9,000 <small>MXN</small></div>
-            <div class="price-note">Ideal para negocios que quieren una web completa y profesional.</div>
-            <ul class="features">
-              <li>Hasta 5 secciones</li>
-              <li>Diseño responsivo</li>
-              <li>Mapa, formulario y redes</li>
-              <li>Publicación incluida</li>
-            </ul>
-          </article>
-
-          <article class="card pricing-card">
-            <h3>Tienda Online</h3>
-            <div class="price">$12,000 – $25,000 <small>MXN</small></div>
-            <div class="price-note">Depende del número de productos, pagos, envíos y panel administrativo.</div>
-            <ul class="features">
-              <li>Catálogo y carrito</li>
-              <li>Métodos de pago</li>
-              <li>Administración de productos</li>
-              <li>Escalable</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="grid grid-2" style="margin-top:22px;">
-          <article class="card">
-            <h3>Mantenimiento Mensual</h3>
-            <div class="price">$1,000 – $2,500 <small>MXN / mes</small></div>
-            <div class="price-note">Para mantener el sitio actualizado, seguro y funcionando correctamente.</div>
-            <ul class="features">
-              <li>Actualizaciones del sitio</li>
-              <li>Cambios menores de contenido</li>
-              <li>Revisión de enlaces y formularios</li>
-              <li>Soporte técnico básico</li>
-              <li>Optimización básica</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>SEO Mensual</h3>
-            <div class="price">$2,500 – $6,000 <small>MXN / mes</small></div>
-            <div class="price-note">Se trabaja de forma continua para mejorar visibilidad y posicionamiento.</div>
-            <ul class="features">
-              <li>Optimización técnica básica</li>
-              <li>Palabras clave</li>
-              <li>Contenido y estructura</li>
-              <li>Search Console y seguimiento</li>
-              <li>Mejoras continuas</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="seo">
-      <div class="container">
-        <h2 class="section-title">¿Cómo funciona el SEO?</h2>
-        <p class="section-subtitle">
-          SEO significa optimización para motores de búsqueda. Su objetivo es ayudar a que tu página
-          aparezca mejor posicionada en Google cuando una persona busca servicios, productos o soluciones relacionadas con tu negocio.
-        </p>
-
-        <div class="grid grid-2">
-          <article class="card">
-            <h3>Qué se trabaja en SEO</h3>
-            <ul class="features">
-              <li>Investigación de palabras clave</li>
-              <li>Títulos, descripciones y encabezados correctos</li>
-              <li>Velocidad y experiencia móvil</li>
-              <li>Estructura clara del contenido</li>
-              <li>Optimización de imágenes</li>
-              <li>Indexación en Google Search Console</li>
-              <li>Enlaces internos y arquitectura del sitio</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Qué debes saber antes de venderlo</h3>
-            <ul class="features">
-              <li>No es inmediato; toma tiempo</li>
-              <li>Se trabaja mejor mes a mes</li>
-              <li>Depende de la competencia del nicho</li>
-              <li>No es solo “meter palabras clave”</li>
-              <li>Debe combinar técnica + contenido + seguimiento</li>
-              <li>Ayuda a atraer tráfico más calificado</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="grid grid-3" style="margin-top:22px;">
-          <article class="card">
-            <h3>SEO básico inicial</h3>
-            <p>Se puede vender como configuración inicial para páginas nuevas.</p>
-            <ul class="features">
-              <li>Estructura básica SEO</li>
-              <li>Meta títulos y descripciones</li>
-              <li>Configuración inicial Search Console</li>
-              <li>Optimización de velocidad básica</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>SEO mensual</h3>
-            <p>Recomendado cuando el cliente quiere crecer y competir en Google.</p>
-            <ul class="features">
-              <li>Análisis y ajustes continuos</li>
-              <li>Nuevas páginas o contenido</li>
-              <li>Seguimiento de keywords</li>
-              <li>Mejoras técnicas periódicas</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <h3>Resultado esperado</h3>
-            <p>No se promete “primer lugar”, pero sí una mejora ordenada en visibilidad, estructura y oportunidades de captación.</p>
-            <ul class="features">
-              <li>Más presencia en búsquedas</li>
-              <li>Mejor calidad del tráfico</li>
-              <li>Más oportunidades de contacto</li>
-              <li>Base sólida para crecer</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="proceso">
-      <div class="container">
-        <h2 class="section-title">Cómo trabajaría tu proyecto</h2>
-        <p class="section-subtitle">
-          Para cotizar correctamente una página necesito definir el objetivo, el tipo de estructura y las funciones que llevará.
-        </p>
-
-        <div class="grid grid-2">
-          <article class="card">
-            <div class="step">
-              <div class="step-num">1</div>
-              <div>
-                <h3>Definición del proyecto</h3>
-                <p>Reviso si será landing page, sitio web, tienda o solución personalizada.</p>
-              </div>
+                    <article class="card">
+                        <h3>Resultado esperado</h3>
+                        <p>No se promete “primer lugar”, pero sí una mejora ordenada en visibilidad, estructura y
+                            oportunidades de captación.</p>
+                        <ul class="features">
+                            <li>Más presencia en búsquedas</li>
+                            <li>Mejor calidad del tráfico</li>
+                            <li>Más oportunidades de contacto</li>
+                            <li>Base sólida para crecer</li>
+                        </ul>
+                    </article>
+                </div>
             </div>
-          </article>
+        </section>
 
-          <article class="card">
-            <div class="step">
-              <div class="step-num">2</div>
-              <div>
-                <h3>Alcance y contenido</h3>
-                <p>Definimos secciones, funciones, formulario, catálogo, pagos o posicionamiento.</p>
-              </div>
-            </div>
-          </article>
 
-          <article class="card">
-            <div class="step">
-              <div class="step-num">3</div>
-              <div>
-                <h3>Diseño y desarrollo</h3>
-                <p>Se construye la página con enfoque en imagen, claridad y conversión.</p>
-              </div>
-            </div>
-          </article>
+        <section class="section" id="proceso">
+            <div class="container">
+                <h2 class="section-title">Cómo trabajaría tu proyecto</h2>
+                <p class="section-subtitle">
+                    Para cotizar correctamente una página necesito definir el objetivo, el tipo de estructura y las
+                    funciones que llevará.
+                </p>
 
-          <article class="card">
-            <div class="step">
-              <div class="step-num">4</div>
-              <div>
-                <h3>Publicación y soporte</h3>
-                <p>Se deja lista para usarse y se puede agregar mantenimiento o SEO mensual.</p>
-              </div>
+                <div class="grid grid-2">
+                    <article class="card">
+                        <div class="step">
+                            <div class="step-num">1</div>
+                            <div>
+                                <h3>Definición del proyecto</h3>
+                                <p>Reviso si será landing page, sitio web, tienda o solución personalizada.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="step">
+                            <div class="step-num">2</div>
+                            <div>
+                                <h3>Alcance y contenido</h3>
+                                <p>Definimos secciones, funciones, formulario, catálogo, pagos o posicionamiento.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="step">
+                            <div class="step-num">3</div>
+                            <div>
+                                <h3>Diseño y desarrollo</h3>
+                                <p>Se construye la página con enfoque en imagen, claridad y conversión.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="step">
+                            <div class="step-num">4</div>
+                            <div>
+                                <h3>Publicación y soporte</h3>
+                                <p>Se deja lista para usarse y se puede agregar mantenimiento o SEO mensual.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
-          </article>
+        </section>
+
+        <section class="section" id="faq">
+            <div class="container">
+                <h2 class="section-title">Preguntas frecuentes</h2>
+                <p class="section-subtitle">
+                    Estas respuestas te ayudan a reducir objeciones antes de la llamada o cotización final.
+                </p>
+
+                <details>
+                    <summary>¿Qué incluye una página web empresarial?</summary>
+                    <p>
+                        Generalmente incluye diseño profesional, adaptación a celular, secciones informativas,
+                        formulario de contacto, botón de WhatsApp, mapa y publicación del sitio.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>¿El dominio y hosting vienen incluidos?</summary>
+                    <p>
+                        Se puede trabajar con el dominio y hosting del cliente o cotizarlos por separado según el caso.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>¿Cuánto tarda el desarrollo?</summary>
+                    <p>
+                        Depende del alcance y de qué tan rápido se entregue el contenido. Una landing page puede salir
+                        más rápido
+                        que una tienda online o un sitio con varias secciones.
+                    </p>
+                </details>
+
+                <details>
+                    <summary>¿SEO es pago único o mensual?</summary>
+                    <p>
+                        Puede existir una configuración inicial SEO como pago único, pero si el cliente quiere crecer en
+                        Google,
+                        normalmente conviene manejarlo como servicio mensual.
+                    </p>
+                </details>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="cta">
+                    <h2 class="section-title" style="margin-bottom:10px;">Si me compartes qué tipo de página necesitas,
+                        te doy un precio exacto</h2>
+                    <p>
+                        Puedo cotizarte de forma puntual una landing page, sitio web, tienda online o un esquema con
+                        mantenimiento y SEO,
+                        ya con alcance, tiempos y entregables claros.
+                    </p>
+                    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+                        <a class="btn btn-primary"
+                            href="https://wa.me/524495820032?text=Hola,%20quiero%20una%20cotizaci%C3%B3n%20exacta%20para%20mi%20proyecto"
+                            target="_blank" rel="noopener noreferrer">
+                            Hablar por WhatsApp
+                        </a>
+                        <a class="btn btn-secondary" href="mailto:tucorreo@ejemplo.com">
+                            Enviar por correo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-box">
+            <div>
+                <strong style="color:#fff;">Web Solutions</strong><br />
+                Desarrollo web, mantenimiento y SEO para negocios.
+            </div>
+            <div>
+                WhatsApp: 449 582 0032<br />
+            </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <div class="container">
-        <h2 class="section-title">Preguntas frecuentes</h2>
-        <p class="section-subtitle">
-          Estas respuestas te ayudan a reducir objeciones antes de la llamada o cotización final.
-        </p>
-
-        <details>
-          <summary>¿Qué incluye una página web empresarial?</summary>
-          <p>
-            Generalmente incluye diseño profesional, adaptación a celular, secciones informativas,
-            formulario de contacto, botón de WhatsApp, mapa y publicación del sitio.
-          </p>
-        </details>
-
-        <details>
-          <summary>¿El dominio y hosting vienen incluidos?</summary>
-          <p>
-            Se puede trabajar con el dominio y hosting del cliente o cotizarlos por separado según el caso.
-          </p>
-        </details>
-
-        <details>
-          <summary>¿Cuánto tarda el desarrollo?</summary>
-          <p>
-            Depende del alcance y de qué tan rápido se entregue el contenido. Una landing page puede salir más rápido
-            que una tienda online o un sitio con varias secciones.
-          </p>
-        </details>
-
-        <details>
-          <summary>¿SEO es pago único o mensual?</summary>
-          <p>
-            Puede existir una configuración inicial SEO como pago único, pero si el cliente quiere crecer en Google,
-            normalmente conviene manejarlo como servicio mensual.
-          </p>
-        </details>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="cta">
-          <h2 class="section-title" style="margin-bottom:10px;">Si me compartes qué tipo de página necesitas, te doy un precio exacto</h2>
-          <p>
-            Puedo cotizarte de forma puntual una landing page, sitio web, tienda online o un esquema con mantenimiento y SEO,
-            ya con alcance, tiempos y entregables claros.
-          </p>
-          <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
-            <a class="btn btn-primary" href="https://wa.me/524495820032?text=Hola,%20quiero%20una%20cotizaci%C3%B3n%20exacta%20para%20mi%20proyecto" target="_blank" rel="noopener noreferrer">
-              Hablar por WhatsApp
-            </a>
-            <a class="btn btn-secondary" href="mailto:tucorreo@ejemplo.com">
-              Enviar por correo
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-box">
-      <div>
-        <strong style="color:#fff;">Web Solutions</strong><br />
-        Desarrollo web, mantenimiento y SEO para negocios.
-      </div>
-      <div>
-        WhatsApp: 449 582 0032<br />
-      </div>
-    </div>
-  </footer>
+    </footer>
 </body>
+
 </html>
