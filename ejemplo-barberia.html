@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barrio Barber | Menú Digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --blanco: #f7f7f7;
+      --blanco-2: #ffffff;
+      --gris: #e9e9e9;
+      --gris-texto: #666666;
+      --negro: #111111;
+      --negro-2: #1b1b1b;
+      --rojo: #d62828;
+      --azul: #2563eb;
+      --verde: #25D366;
+      --rojo-btn: #dc2626;
+      --azul-btn: #2563eb;
+      --sombra: 0 12px 28px rgba(0,0,0,0.16);
+      --radio: 24px;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background:
+        linear-gradient(rgba(255,255,255,0.78), rgba(255,255,255,0.94)),
+        url('https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=1200&q=80') center/cover fixed;
+      color: var(--negro);
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 16px 14px 110px;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 320px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--sombra);
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.72), rgba(0,0,0,0.18)),
+        url('https://images.unsplash.com/photo-1512690459411-b0fd1c86b8c8?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      padding: 22px 18px;
+      border: 4px solid white;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 18px;
+      width: 14px;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        var(--rojo) 0 22px,
+        white 22px 44px,
+        var(--azul) 44px 66px
+      );
+      border-radius: 20px;
+      opacity: 0.95;
+      box-shadow: 0 0 14px rgba(0,0,0,0.2);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding-left: 22px;
+    }
+
+    .top-tag {
+      display: inline-block;
+      background: white;
+      color: var(--negro);
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.2rem;
+      line-height: 0.95;
+      letter-spacing: 1px;
+      color: white;
+      margin-bottom: 8px;
+      text-shadow: 0 4px 18px rgba(0,0,0,0.3);
+    }
+
+    .subtitle {
+      color: #f1f1f1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      max-width: 310px;
+    }
+
+    .barber-pattern {
+      display: flex;
+      gap: 0;
+      margin-top: 16px;
+      border-radius: 999px;
+      overflow: hidden;
+      width: 100%;
+      height: 10px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+    }
+
+    .barber-pattern span:nth-child(1) { background: var(--rojo); width: 33.33%; }
+    .barber-pattern span:nth-child(2) { background: white; width: 33.33%; }
+    .barber-pattern span:nth-child(3) { background: var(--azul); width: 33.33%; }
+
+    .section {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radio);
+      padding: 20px 16px;
+      margin-top: 18px;
+      box-shadow: var(--sombra);
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .section-title h2 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--negro);
+    }
+
+    .badge-mini {
+      background: #111111;
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px dashed rgba(0,0,0,0.12);
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .menu-item:first-child {
+      padding-top: 0;
+    }
+
+    .service-box h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--negro);
+      margin-bottom: 4px;
+    }
+
+    .service-box p {
+      font-size: 0.84rem;
+      color: var(--gris-texto);
+      line-height: 1.5;
+    }
+
+    .price {
+      min-width: 80px;
+      text-align: right;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--rojo);
+    }
+
+    .featured {
+      position: relative;
+      min-height: 250px;
+      border-radius: 24px;
+      overflow: hidden;
+      margin-top: 18px;
+      box-shadow: var(--sombra);
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.25)),
+        url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      display: flex;
+      align-items: flex-end;
+      border: 4px solid white;
+    }
+
+    .featured::after {
+      content: "";
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: conic-gradient(var(--rojo), white, var(--azul), white, var(--rojo));
+      opacity: 0.95;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+    }
+
+    .featured-content {
+      position: relative;
+      z-index: 1;
+      padding: 22px 18px;
+      width: 100%;
+    }
+
+    .featured-label {
+      display: inline-block;
+      background: white;
+      color: var(--negro);
+      font-size: 0.75rem;
+      font-weight: 900;
+      padding: 8px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .featured h3 {
+      font-size: 1.5rem;
+      color: white;
+      font-weight: 900;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .featured .featured-price {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .featured p {
+      color: #ededed;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 330px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .mini-card {
+      background: #f1f1f1;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .mini-card strong {
+      display: block;
+      color: var(--negro);
+      font-size: 0.92rem;
+      margin-bottom: 5px;
+    }
+
+    .mini-card span {
+      color: var(--gris-texto);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .street-banner {
+      margin-top: 18px;
+      background: linear-gradient(135deg, #111111, #2a2a2a);
+      color: white;
+      border-radius: 20px;
+      padding: 18px 16px;
+      box-shadow: var(--sombra);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .street-banner::before {
+      content: "";
+      position: absolute;
+      left: -20px;
+      top: 0;
+      width: 120px;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(214,40,40,0.14), transparent);
+      transform: skewX(-20deg);
+    }
+
+    .street-banner h3 {
+      position: relative;
+      z-index: 1;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .street-banner p {
+      position: relative;
+      z-index: 1;
+      color: #dddddd;
+      font-size: 0.86rem;
+      line-height: 1.6;
+    }
+
+    .actions {
+      position: fixed;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      width: calc(100% - 22px);
+      max-width: 460px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: white;
+      font-size: 0.88rem;
+      font-weight: 800;
+      padding: 14px 10px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      border: 2px solid rgba(255,255,255,0.65);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.96;
+    }
+
+    .btn-whatsapp {
+      background: linear-gradient(135deg, #1fb857, var(--verde));
+    }
+
+    .btn-call {
+      background: linear-gradient(135deg, #3b82f6, var(--azul-btn));
+    }
+
+    .btn-map {
+      background: linear-gradient(135deg, #ef4444, var(--rojo-btn));
+    }
+
+    @media (max-width: 390px) {
+      .brand {
+        font-size: 2.7rem;
+      }
+
+      .subtitle {
+        font-size: 0.88rem;
+      }
+
+      .btn {
+        font-size: 0.8rem;
+        padding: 13px 8px;
+      }
+
+      .featured h3 {
+        font-size: 1.25rem;
+      }
+    }
+
+    @media (min-width: 700px) {
+      .hero {
+        min-height: 350px;
+      }
+
+      .brand {
+        font-size: 3.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="app">
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="top-tag">FADE • TAPER • BARBA • FLOW</div>
+        <h1 class="brand">BARBER</h1>
+        <p class="subtitle">Cortes modernos, precio accesible y puro estilo de barrio para andar al cien.</p>
+
+        <div class="barber-pattern">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <h2>Servicios principales</h2>
+        <div class="badge-mini">Desde $90</div>
+      </div>
+
+      <div class="menu-list">
+        <div class="menu-item">
+          <div class="service-box">
+            <h3>Fade clásico</h3>
+            <p>Corte limpio, fresco y fácil de mantener.</p>
+          </div>
+          <div class="price">$120</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="service-box">
+            <h3>Fade moderno</h3>
+            <p>Más marcado, más urbano, más actual.</p>
+          </div>
+          <div class="price">$150</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="service-box">
+            <h3>Taper + diseño</h3>
+            <p>Detalle sencillo para levantar el estilo.</p>
+          </div>
+          <div class="price">$170</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="service-box">
+            <h3>Corte + ceja</h3>
+            <p>Look más definido y mejor presentación.</p>
+          </div>
+          <div class="price">$160</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="service-box">
+            <h3>Corte + barba</h3>
+            <p>Combo completo para salir bien alineado.</p>
+          </div>
+          <div class="price">$190</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="service-box">
+            <h3>Perfilado de barba</h3>
+            <p>Limpieza rápida con acabado parejo.</p>
+          </div>
+          <div class="price">$90</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured">
+      <div class="featured-content">
+        <div class="featured-label">EL MÁS PEDIDO</div>
+        <h3>Fade premium + barba</h3>
+        <div class="featured-price">$220</div>
+        <p>Incluye corte moderno, perfilado de barba y acabado detallado para un look más completo y callejero.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <h2>Lo que te llevas aquí</h2>
+      </div>
+
+      <div class="info-grid">
+        <div class="mini-card">
+          <strong>Cortes al estilo actual</strong>
+          <span>Inspirados en flow urbano, fades y looks modernos.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Precios accesibles</strong>
+          <span>Buen servicio sin pegarle tanto al bolsillo.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Atención rápida</strong>
+          <span>Para el que quiere verse bien sin perder el tiempo.</span>
+        </div>
+
+        <div class="mini-card">
+          <strong>Barbería con barrio</strong>
+          <span>Ambiente callejero, directo y con actitud.</span>
+        </div>
+      </div>
+
+      <div class="street-banner">
+        <h3>Caile por tu corte</h3>
+        <p>Aquí no vienes nomás por un servicio. Vienes por imagen, presencia y ese toque que se nota cuando sales bien arreglado.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="actions">
+    <a href="https://wa.me/524495820032?text=Hola,%20me%20interesa%20una%20cotizaci%C3%B3n" class="btn btn-whatsapp">WhatsApp</a>
+    <a href="tel:4491386873" class="btn btn-call">Llamar</a>
+    <a href="https://maps.app.goo.gl/Wk78oyDtNKZS2opB8" class="btn btn-map">Ubicación</a>
+  </div>
+
+</body>
+</html>
