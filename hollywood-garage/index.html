@@ -1,752 +1,910 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hollywood Garage | Catálogo Web</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --black: #0b0b0b;
-      --black-2: #141414;
-      --black-3: #1c1c1c;
-      --orange: #d96a1d;
-      --orange-2: #f08a24;
-      --red-dark: #8e1f12;
-      --cream: #f3eee8;
-      --gray: #b6b6b6;
-      --gray-2: #7d7d7d;
-      --line: rgba(255,255,255,0.08);
-      --shadow: 0 16px 40px rgba(0,0,0,0.35);
-      --radius: 24px;
-    }
-
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(240,138,36,0.18), transparent 20%),
-        linear-gradient(180deg, #0a0a0a, #111111 35%, #0d0d0d 100%);
-      color: var(--cream);
-      min-height: 100vh;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      width: min(1180px, 92%);
-      margin: auto;
-    }
-
-    .hero {
-      padding: 28px 0 40px;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      margin-bottom: 28px;
-      padding: 14px 0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .brand img {
-      width: 82px;
-      height: 82px;
-      object-fit: contain;
-      border-radius: 50%;
-      background: #000;
-      box-shadow: var(--shadow);
-      border: 2px solid rgba(255,255,255,0.06);
-    }
-
-    .brand-text h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.4rem;
-      letter-spacing: 1.5px;
-      line-height: 0.95;
-      color: var(--cream);
-    }
-
-    .brand-text p {
-      color: var(--gray);
-      font-size: 0.92rem;
-      margin-top: 4px;
-    }
-
-    .tagline {
-      font-size: 0.9rem;
-      font-weight: 700;
-      padding: 10px 16px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
-      border-radius: 999px;
-      color: var(--orange-2);
-    }
-
-    .hero-box {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 26px;
-      align-items: stretch;
-    }
-
-    .hero-copy,
-    .hero-image {
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .hero-copy {
-      padding: 34px 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 440px;
-      position: relative;
-    }
-
-    .hero-copy::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(130deg, rgba(217,106,29,0.12), transparent 35%),
-        linear-gradient(320deg, rgba(142,31,18,0.12), transparent 35%);
-      pointer-events: none;
-    }
-
-    .hero-copy > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      width: fit-content;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(217,106,29,0.14);
-      color: var(--orange-2);
-      font-size: 0.8rem;
-      font-weight: 800;
-      letter-spacing: 0.7px;
-      margin-bottom: 18px;
-      border: 1px solid rgba(240,138,36,0.18);
-    }
-
-    .hero-copy h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      line-height: 0.95;
-      letter-spacing: 1.5px;
-      margin-bottom: 16px;
-      color: var(--cream);
-    }
-
-    .hero-copy h2 span {
-      color: var(--orange-2);
-    }
-
-    .hero-copy p {
-      color: var(--gray);
-      line-height: 1.8;
-      max-width: 580px;
-      margin-bottom: 24px;
-      font-size: 0.98rem;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .hero-badges span {
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--line);
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--cream);
-    }
-
-    .hero-image {
-      min-height: 440px;
-      background:
-        linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.2)),
-        url('local.jpg') center/cover no-repeat;
-      display: flex;
-      align-items: end;
-      padding: 26px;
-      position: relative;
-    }
-
-    .hero-image::after {
-      content: "";
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 82px;
-      height: 82px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--orange-2), var(--red-dark));
-      opacity: 0.85;
-      filter: blur(0.5px);
-    }
-
-    .hero-card {
-      position: relative;
-      z-index: 1;
-      background: rgba(10,10,10,0.7);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(8px);
-      border-radius: 20px;
-      padding: 18px;
-      max-width: 290px;
-    }
-
-    .hero-card strong {
-      display: block;
-      font-size: 1rem;
-      margin-bottom: 8px;
-      color: var(--cream);
-    }
-
-    .hero-card p {
-      color: var(--gray);
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-
-    section {
-      padding: 24px 0 10px;
-    }
-
-    .section-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: end;
-      gap: 20px;
-      margin-bottom: 22px;
-    }
-
-    .section-head h3 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.5rem;
-      letter-spacing: 1px;
-      color: var(--cream);
-    }
-
-    .section-head p {
-      color: var(--gray);
-      max-width: 640px;
-      line-height: 1.7;
-      font-size: 0.95rem;
-    }
-
-    .bike-grid,
-    .products-grid {
-      display: grid;
-      gap: 22px;
-    }
-
-    .bike-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .products-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .bike-card,
-    .product-card,
-    .info-box {
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .bike-image,
-    .product-image {
-      height: 240px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-
-    .bike-image::after,
-    .product-image::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0.08));
-    }
-
-    .badge {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      z-index: 1;
-      background: var(--orange);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.76rem;
-      font-weight: 800;
-      letter-spacing: 0.4px;
-      box-shadow: var(--shadow);
-    }
-
-    .bike-body,
-    .product-body {
-      padding: 20px 18px 18px;
-    }
-
-    .bike-body h4,
-    .product-body h4 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.75rem;
-      letter-spacing: 0.7px;
-      margin-bottom: 8px;
-      color: var(--cream);
-    }
-
-    .bike-body p,
-    .product-body p {
-      color: var(--gray);
-      line-height: 1.7;
-      font-size: 0.92rem;
-      margin-bottom: 16px;
-    }
-
-    .specs {
-      display: grid;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .spec {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
-      font-size: 0.9rem;
-    }
-
-    .spec span:first-child {
-      color: var(--gray);
-    }
-
-    .spec span:last-child {
-      color: var(--cream);
-      font-weight: 700;
-      text-align: right;
-    }
-
-    .price {
-      display: inline-block;
-      margin-top: 4px;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(217,106,29,0.13);
-      border: 1px solid rgba(240,138,36,0.18);
-      color: var(--orange-2);
-      font-weight: 800;
-      font-size: 0.95rem;
-    }
-
-    .split-section {
-      display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
-      gap: 22px;
-      margin-top: 8px;
-    }
-
-    .info-box {
-      padding: 24px;
-    }
-
-    .info-box h4 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      letter-spacing: 0.8px;
-      margin-bottom: 10px;
-      color: var(--cream);
-    }
-
-    .info-box p {
-      color: var(--gray);
-      line-height: 1.8;
-      margin-bottom: 18px;
-    }
-
-    .mini-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .mini-item {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .mini-item strong {
-      display: block;
-      color: var(--cream);
-      margin-bottom: 4px;
-    }
-
-    .mini-item span {
-      color: var(--gray);
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-
-    .footer-note {
-      margin: 30px 0 60px;
-      padding: 22px;
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(217,106,29,0.16), rgba(142,31,18,0.12));
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-
-    .footer-note h4 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      letter-spacing: 0.8px;
-      margin-bottom: 8px;
-    }
-
-    .footer-note p {
-      color: var(--gray);
-      line-height: 1.7;
-      max-width: 760px;
-      margin: auto;
-    }
-
-    @media (max-width: 1050px) {
-      .bike-grid,
-      .products-grid,
-      .split-section,
-      .hero-box {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .section-head {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .bike-grid,
-      .products-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-copy,
-      .hero-image {
-        min-height: auto;
-      }
-
-      .hero-copy {
-        padding: 28px 22px;
-      }
-
-      .brand img {
-        width: 66px;
-        height: 66px;
-      }
-
-      .brand-text h1 {
-        font-size: 2rem;
-      }
-
-      .hero-copy h2 {
-        font-size: 3rem;
-      }
-
-      .bike-image,
-      .product-image {
-        height: 220px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hollywood Garage | Catálogo Web</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .floating-buttons {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .float-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.25s ease;
+        }
+
+        .float-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .float-btn:hover {
+            transform: scale(1.1) translateY(-2px);
+        }
+
+        /* Colores biker */
+
+        .whatsapp {
+            background: linear-gradient(135deg, #1fb857, #25D366);
+        }
+
+        .phone {
+            background: linear-gradient(135deg, #d96a1d, #f08a24);
+        }
+
+        .facebook {
+            background: linear-gradient(135deg, #1877f2, #0d5ed7);
+        }
+
+        /* Mobile */
+
+        @media (max-width: 768px) {
+            .float-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .float-btn svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .map-section {
+            margin-top: 30px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 22px;
+            box-shadow: 0 16px 38px rgba(0, 0, 0, 0.38);
+        }
+
+        .map-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #f08a24;
+            margin-bottom: 10px;
+        }
+
+        .map-text {
+            color: #c7c7c7;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+        }
+
+        .map-embed {
+            width: 100%;
+            height: 320px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            background: #151515;
+        }
+
+        .map-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .map-section {
+                padding: 18px;
+            }
+
+            .map-title {
+                font-size: 1.7rem;
+            }
+
+            .map-embed {
+                height: 260px;
+            }
+        }
+
+        :root {
+            --black: #0b0b0b;
+            --black-2: #141414;
+            --black-3: #1c1c1c;
+            --orange: #d96a1d;
+            --orange-2: #f08a24;
+            --red-dark: #8e1f12;
+            --cream: #f3eee8;
+            --gray: #b6b6b6;
+            --gray-2: #7d7d7d;
+            --line: rgba(255, 255, 255, 0.08);
+            --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+            --radius: 24px;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background:
+                radial-gradient(circle at top, rgba(240, 138, 36, 0.18), transparent 20%),
+                linear-gradient(180deg, #0a0a0a, #111111 35%, #0d0d0d 100%);
+            color: var(--cream);
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        .hero {
+            padding: 28px 0 40px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 28px;
+            padding: 14px 0;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand img {
+            width: 82px;
+            height: 82px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: #000;
+            box-shadow: var(--shadow);
+            border: 2px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .brand-text h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.4rem;
+            letter-spacing: 1.5px;
+            line-height: 0.95;
+            color: var(--cream);
+        }
+
+        .brand-text p {
+            color: var(--gray);
+            font-size: 0.92rem;
+            margin-top: 4px;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 10px 16px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 999px;
+            color: var(--orange-2);
+        }
+
+        .hero-box {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 26px;
+            align-items: stretch;
+        }
+
+        .hero-copy,
+        .hero-image {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--line);
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .hero-copy {
+            padding: 34px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 440px;
+            position: relative;
+        }
+
+        .hero-copy::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(130deg, rgba(217, 106, 29, 0.12), transparent 35%),
+                linear-gradient(320deg, rgba(142, 31, 18, 0.12), transparent 35%);
+            pointer-events: none;
+        }
+
+        .hero-copy>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            width: fit-content;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(217, 106, 29, 0.14);
+            color: var(--orange-2);
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(240, 138, 36, 0.18);
+        }
+
+        .hero-copy h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            line-height: 0.95;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+            color: var(--cream);
+        }
+
+        .hero-copy h2 span {
+            color: var(--orange-2);
+        }
+
+        .hero-copy p {
+            color: var(--gray);
+            line-height: 1.8;
+            max-width: 580px;
+            margin-bottom: 24px;
+            font-size: 0.98rem;
+        }
+
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .hero-badges span {
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--line);
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--cream);
+        }
+
+        .hero-image {
+            min-height: 440px;
+            background:
+                linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.2)),
+                url('local.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: end;
+            padding: 26px;
+            position: relative;
+        }
+
+        .hero-image::after {
+            content: "";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--orange-2), var(--red-dark));
+            opacity: 0.85;
+            filter: blur(0.5px);
+        }
+
+        .hero-card {
+            position: relative;
+            z-index: 1;
+            background: rgba(10, 10, 10, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 18px;
+            max-width: 290px;
+        }
+
+        .hero-card strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--cream);
+        }
+
+        .hero-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        section {
+            padding: 24px 0 10px;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 20px;
+            margin-bottom: 22px;
+        }
+
+        .section-head h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            color: var(--cream);
+        }
+
+        .section-head p {
+            color: var(--gray);
+            max-width: 640px;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .bike-grid,
+        .products-grid {
+            display: grid;
+            gap: 22px;
+        }
+
+        .bike-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .products-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .bike-card,
+        .product-card,
+        .info-box {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .bike-image,
+        .product-image {
+            height: 240px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .bike-image::after,
+        .product-image::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.08));
+        }
+
+        .badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 1;
+            background: var(--orange);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            box-shadow: var(--shadow);
+        }
+
+        .bike-body,
+        .product-body {
+            padding: 20px 18px 18px;
+        }
+
+        .bike-body h4,
+        .product-body h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.75rem;
+            letter-spacing: 0.7px;
+            margin-bottom: 8px;
+            color: var(--cream);
+        }
+
+        .bike-body p,
+        .product-body p {
+            color: var(--gray);
+            line-height: 1.7;
+            font-size: 0.92rem;
+            margin-bottom: 16px;
+        }
+
+        .specs {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .spec {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+
+        .spec span:first-child {
+            color: var(--gray);
+        }
+
+        .spec span:last-child {
+            color: var(--cream);
+            font-weight: 700;
+            text-align: right;
+        }
+
+        .price {
+            display: inline-block;
+            margin-top: 4px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(217, 106, 29, 0.13);
+            border: 1px solid rgba(240, 138, 36, 0.18);
+            color: var(--orange-2);
+            font-weight: 800;
+            font-size: 0.95rem;
+        }
+
+        .split-section {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 22px;
+            margin-top: 8px;
+        }
+
+        .info-box {
+            padding: 24px;
+        }
+
+        .info-box h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 0.8px;
+            margin-bottom: 10px;
+            color: var(--cream);
+        }
+
+        .info-box p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .mini-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .mini-item {
+            padding: 14px 16px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .mini-item strong {
+            display: block;
+            color: var(--cream);
+            margin-bottom: 4px;
+        }
+
+        .mini-item span {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-note {
+            margin: 30px 0 60px;
+            padding: 22px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(217, 106, 29, 0.16), rgba(142, 31, 18, 0.12));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .footer-note h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+        }
+
+        .footer-note p {
+            color: var(--gray);
+            line-height: 1.7;
+            max-width: 760px;
+            margin: auto;
+        }
+
+        @media (max-width: 1050px) {
+
+            .bike-grid,
+            .products-grid,
+            .split-section,
+            .hero-box {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .section-head {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .bike-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-copy,
+            .hero-image {
+                min-height: auto;
+            }
+
+            .hero-copy {
+                padding: 28px 22px;
+            }
+
+            .brand img {
+                width: 66px;
+                height: 66px;
+            }
+
+            .brand-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-copy h2 {
+                font-size: 3rem;
+            }
+
+            .bike-image,
+            .product-image {
+                height: 220px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-  <header class="hero">
-    <div class="container">
+    <header class="hero">
+        <div class="container">
 
-      <div class="topbar">
-        <div class="brand">
-          <img src="hollywood-garage-logo.jpg" alt="Hollywood Garage Logo">
-          <div class="brand-text">
-            <h1>Hollywood Garage</h1>
-            <p>Motocicletas chopper, accesorios, rines y estilo biker</p>
-          </div>
+            <div class="topbar">
+                <div class="brand">
+                    <img src="hollywood-garage-logo.jpg" alt="Hollywood Garage Logo">
+                    <div class="brand-text">
+                        <h1>Hollywood Garage</h1>
+                        <p>Motocicletas chopper, accesorios, rines y estilo biker</p>
+                    </div>
+                </div>
+
+                <div class="tagline">Custom • Chopper • Garage Style</div>
+            </div>
+
+            <div class="hero-box">
+                <div class="hero-copy">
+                    <span class="eyebrow">CATÁLOGO DESTACADO</span>
+                    <h2>Máquinas con <span>carácter</span> y estilo propio</h2>
+                    <p>
+                        Explora nuestro catálogo de motocicletas estilo chopper, accesorios, rines y productos
+                        para motociclistas. Diseñado para proyectar fuerza, libertad y personalidad sobre el asfalto.
+                    </p>
+
+                    <div class="hero-badges">
+                        <span>Motocicletas chopper</span>
+                        <span>Rines personalizados</span>
+                        <span>Accesorios biker</span>
+                        <span>Refacciones y estilo</span>
+                    </div>
+                </div>
+
+                <div class="map-section" id="mapa">
+                    <h3 class="map-title">Ubicación</h3>
+                    <p class="map-text">Visítanos en Hollywood Garage y conoce nuestras motos, accesorios y piezas
+                        custom.</p>
+
+                    <div class="map-embed">
+                        <!-- Reemplaza este bloque por tu iframe real de Google Maps -->
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1851.0277821164882!2d-102.26791289757558!3d21.893936018108175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjHCsDUzJzM3LjUiTiAxMDLCsDE2JzA0LjciVw!5e0!3m2!1ses!2smx!4v1774639755618!5m2!1ses!2smx"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+            </div>
+    </header>
+
+    <section>
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <h3>Motocicletas destacadas</h3>
+                </div>
+                <p>
+                    Aquí tienes espacio para mostrar 3 motos principales. Puedes reemplazar las fotos,
+                    modelos, motores, años, colores, precios y especificaciones reales.
+                </p>
+            </div>
+
+            <div class="bike-grid">
+                <article class="bike-card">
+                    <div class="bike-image" style="background-image: url(chopper1.jpg)">
+                        <span class="badge">Chopper 01</span>
+                    </div>
+                    <div class="bike-body">
+                        <h4>Shadow Custom 1200</h4>
+                        <p>Motocicleta de presencia fuerte, perfil bajo y estilo clásico para rutas largas y ciudad.</p>
+
+                        <div class="specs">
+                            <div class="spec"><span>Motor</span><span>1200 cc</span></div>
+                            <div class="spec"><span>Transmisión</span><span>Manual 5 vel.</span></div>
+                            <div class="spec"><span>Estilo</span><span>Chopper clásica</span></div>
+                            <div class="spec"><span>Color</span><span>Negro mate / cobre</span></div>
+                        </div>
+
+                        <span class="price">$000,000 MXN</span>
+                    </div>
+                </article>
+
+                <article class="bike-card">
+                    <div class="bike-image" style="background-image: url('chopper2.jpg');">
+                        <span class="badge">Chopper 02</span>
+                    </div>
+                    <div class="bike-body">
+                        <h4>Iron Road 900</h4>
+                        <p>Diseño robusto con tanque estilizado, postura cómoda y personalidad perfecta para uso urbano.
+                        </p>
+
+                        <div class="specs">
+                            <div class="spec"><span>Motor</span><span>900 cc</span></div>
+                            <div class="spec"><span>Frenos</span><span>Disco delantero</span></div>
+                            <div class="spec"><span>Estilo</span><span>Bobber / Chopper</span></div>
+                            <div class="spec"><span>Color</span><span>Rojo vino / negro</span></div>
+                        </div>
+
+                        <span class="price">$000,000 MXN</span>
+                    </div>
+                </article>
+
+                <article class="bike-card">
+                    <div class="bike-image" style="background-image: url('chopper3.jpg');">
+                        <span class="badge">Chopper 03</span>
+                    </div>
+                    <div class="bike-body">
+                        <h4>Rebel King 1500</h4>
+                        <p>Una moto pensada para quienes quieren mayor cilindrada, imagen imponente y manejo con
+                            actitud.</p>
+
+                        <div class="specs">
+                            <div class="spec"><span>Motor</span><span>1500 cc</span></div>
+                            <div class="spec"><span>Suspensión</span><span>Reforzada</span></div>
+                            <div class="spec"><span>Estilo</span><span>Custom touring</span></div>
+                            <div class="spec"><span>Color</span><span>Negro / gris acero</span></div>
+                        </div>
+
+                        <span class="price">$000,000 MXN</span>
+                    </div>
+                </article>
+            </div>
         </div>
+    </section>
 
-        <div class="tagline">Custom • Chopper • Garage Style</div>
-      </div>
+    <section>
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <h3>Rines y accesorios</h3>
+                </div>
+                <p>
+                    Espacio para mostrar rines, piezas personalizadas o accesorios destacados para motocicleta.
+                </p>
+            </div>
 
-      <div class="hero-box">
-        <div class="hero-copy">
-          <span class="eyebrow">CATÁLOGO DESTACADO</span>
-          <h2>Máquinas con <span>carácter</span> y estilo propio</h2>
-          <p>
-            Explora nuestro catálogo de motocicletas estilo chopper, accesorios, rines y productos
-            para motociclistas. Diseñado para proyectar fuerza, libertad y personalidad sobre el asfalto.
-          </p>
+            <div class="split-section">
+                <div class="info-box">
+                    <h4>Rines personalizados</h4>
+                    <p>
+                        Muestra aquí los tipos de rines que vendes: cromados, negros mate, aluminio pulido,
+                        diseño de radios, dobles o especiales para proyectos custom.
+                    </p>
 
-          <div class="hero-badges">
-            <span>Motocicletas chopper</span>
-            <span>Rines personalizados</span>
-            <span>Accesorios biker</span>
-            <span>Refacciones y estilo</span>
-          </div>
+                    <div class="mini-list">
+                        <div class="mini-item">
+                            <strong>Rines cromados</strong>
+                            <span>Para un estilo clásico brillante con presencia fuerte.</span>
+                        </div>
+
+                        <div class="mini-item">
+                            <strong>Rines negros mate</strong>
+                            <span>Ideales para motos de estética más agresiva y moderna.</span>
+                        </div>
+
+                        <div class="mini-item">
+                            <strong>Rines de radios</strong>
+                            <span>Perfectos para proyectos chopper tradicionales y restauraciones.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="products-grid">
+                    <article class="product-card">
+                        <div class="product-image" style="background-image: url('rin.jpg');">
+                            <span class="badge">Rines</span>
+                        </div>
+                        <div class="product-body">
+                            <h4>Rines estilo custom</h4>
+                            <p>Opciones para personalizar la apariencia de la moto y reforzar su identidad.</p>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image"
+                            style="background-image: url('https://http2.mlstatic.com/D_Q_NP_2X_851755-CBT100684365944_122025-P-casco-para-motocross-certificado-dot-con-gogles-y-regalos.webp');">
+                            <span class="badge">Cascos</span>
+                        </div>
+                        <div class="product-body">
+                            <h4>Cascos biker</h4>
+                            <p>Diseños retro, agresivos o minimalistas para combinar con la personalidad de la moto.</p>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image"
+                            style="background-image: url('https://i5.walmartimages.com/asr/5f7477c2-8159-481a-bfc6-608ba16c6380.ecdc2f102d03ffa663684dc7755fcfce.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF');">
+                            <span class="badge">Accesorios</span>
+                        </div>
+                        <div class="product-body">
+                            <h4>Guantes y equipo</h4>
+                            <p>Accesorios para comodidad, seguridad y un look más completo para el motociclista.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="hero-image">
-          <div class="hero-card">
-            <strong>Hollywood Garage</strong>
-            <p>
-              Un espacio para quienes buscan motos con presencia, componentes con estilo
-              y productos que refuercen la identidad biker.
-            </p>
-          </div>
+    <section>
+        <div class="container">
+            <div class="section-head">
+                <div>
+                    <h3>Productos de tienda</h3>
+                </div>
+                <p>
+                    Aquí puedes listar otros productos que vendan en la tienda de motos, como piezas,
+                    ropa, lubricantes, luces, espejos, escapes o artículos decorativos.
+                </p>
+            </div>
+
+            <div class="products-grid">
+                <article class="product-card">
+                    <div class="product-image"
+                        style="background-image: url('https://img.freepik.com/foto-gratis/mujer-senior-alto-angulo-motocicleta_23-2150909375.jpg?semt=ais_hybrid&w=740&q=80');">
+                        <span class="badge">Refacciones</span>
+                    </div>
+                    <div class="product-body">
+                        <h4>Espejos y manubrios</h4>
+                        <p>Componentes para renovar estética, postura de manejo y personalidad de la motocicleta.</p>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-image"
+                        style="background-image: url('https://www.bardahl.com.mx/wp-content/uploads/2016/10/Cambia-Aceite-Motocicleta.jpg');">
+                        <span class="badge">Cuidado</span>
+                    </div>
+                    <div class="product-body">
+                        <h4>Aceites y mantenimiento</h4>
+                        <p>Lubricantes, productos de limpieza y consumibles para mantener la moto en gran estado.</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="footer-note">
+                <h4>Hecho para vender motos con presencia</h4>
+                <p>
+                    Este catálogo puede adaptarse con fotos reales de Hollywood Garage, modelos reales,
+                    botones de WhatsApp, llamada, ubicación, precios, promociones y secciones para cotización.
+                </p>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <div class="floating-buttons">
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/524492111544" target="_blank" class="float-btn whatsapp">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M20.52 3.48A11.94 11.94 0 0012.05 0C5.48 0 .13 5.35.13 11.93c0 2.1.55 4.16 1.6 5.98L0 24l6.23-1.63a11.9 11.9 0 005.82 1.49h.01c6.57 0 11.92-5.35 11.92-11.93 0-3.18-1.24-6.16-3.46-8.38zM12.06 21.3c-1.77 0-3.5-.47-5.02-1.37l-.36-.21-3.7.97.99-3.61-.23-.37a9.27 9.27 0 01-1.43-4.97c0-5.13 4.17-9.3 9.3-9.3 2.48 0 4.8.97 6.56 2.72a9.25 9.25 0 012.73 6.58c0 5.13-4.17 9.3-9.3 9.3zm5.1-6.97c-.28-.14-1.65-.81-1.9-.9-.26-.09-.45-.14-.64.14-.19.28-.73.9-.9 1.08-.16.19-.33.21-.6.07-.28-.14-1.17-.43-2.22-1.37-.82-.73-1.37-1.63-1.53-1.9-.16-.28-.02-.43.12-.57.13-.13.28-.33.42-.5.14-.16.19-.28.28-.47.09-.19.05-.35-.02-.5-.07-.14-.64-1.54-.88-2.11-.23-.56-.47-.48-.64-.49-.17-.01-.35-.01-.54-.01-.19 0-.5.07-.76.35-.26.28-1 1-1 2.44s1.02 2.83 1.16 3.02c.14.19 2 3.05 4.85 4.27.68.29 1.21.46 1.62.59.68.22 1.3.19 1.79.12.55-.08 1.65-.67 1.88-1.32.23-.65.23-1.21.16-1.32-.07-.12-.26-.19-.54-.33z" />
+            </svg>
+        </a>
+
+        <!-- Teléfono -->
+        <a href="tel:4493445070" class="float-btn phone">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M6.62 10.79a15.054 15.054 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V21a1 1 0 01-1 1C10.07 22 2 13.93 2 4a1 1 0 011-1h4.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z" />
+            </svg>
+        </a>
+
+        <!-- Facebook -->
+        <a href="#" target="_blank" class="float-btn facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M22 12a10 10 0 10-11.56 9.87v-6.99H7.9V12h2.54V9.8c0-2.5 1.5-3.89 3.78-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.62.77-1.62 1.56V12h2.76l-.44 2.88h-2.32v6.99A10 10 0 0022 12z" />
+            </svg>
+        </a>
 
     </div>
-  </header>
-
-  <section>
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h3>Motocicletas destacadas</h3>
-        </div>
-        <p>
-          Aquí tienes espacio para mostrar 3 motos principales. Puedes reemplazar las fotos,
-          modelos, motores, años, colores, precios y especificaciones reales.
-        </p>
-      </div>
-
-      <div class="bike-grid">
-        <article class="bike-card">
-          <div class="bike-image" style="background-image: url(chopper1.jpg)">
-            <span class="badge">Chopper 01</span>
-          </div>
-          <div class="bike-body">
-            <h4>Shadow Custom 1200</h4>
-            <p>Motocicleta de presencia fuerte, perfil bajo y estilo clásico para rutas largas y ciudad.</p>
-
-            <div class="specs">
-              <div class="spec"><span>Motor</span><span>1200 cc</span></div>
-              <div class="spec"><span>Transmisión</span><span>Manual 5 vel.</span></div>
-              <div class="spec"><span>Estilo</span><span>Chopper clásica</span></div>
-              <div class="spec"><span>Color</span><span>Negro mate / cobre</span></div>
-            </div>
-
-            <span class="price">$000,000 MXN</span>
-          </div>
-        </article>
-
-        <article class="bike-card">
-          <div class="bike-image" style="background-image: url('chopper2.jpg');">
-            <span class="badge">Chopper 02</span>
-          </div>
-          <div class="bike-body">
-            <h4>Iron Road 900</h4>
-            <p>Diseño robusto con tanque estilizado, postura cómoda y personalidad perfecta para uso urbano.</p>
-
-            <div class="specs">
-              <div class="spec"><span>Motor</span><span>900 cc</span></div>
-              <div class="spec"><span>Frenos</span><span>Disco delantero</span></div>
-              <div class="spec"><span>Estilo</span><span>Bobber / Chopper</span></div>
-              <div class="spec"><span>Color</span><span>Rojo vino / negro</span></div>
-            </div>
-
-            <span class="price">$000,000 MXN</span>
-          </div>
-        </article>
-
-        <article class="bike-card">
-          <div class="bike-image" style="background-image: url('chopper3.jpg');">
-            <span class="badge">Chopper 03</span>
-          </div>
-          <div class="bike-body">
-            <h4>Rebel King 1500</h4>
-            <p>Una moto pensada para quienes quieren mayor cilindrada, imagen imponente y manejo con actitud.</p>
-
-            <div class="specs">
-              <div class="spec"><span>Motor</span><span>1500 cc</span></div>
-              <div class="spec"><span>Suspensión</span><span>Reforzada</span></div>
-              <div class="spec"><span>Estilo</span><span>Custom touring</span></div>
-              <div class="spec"><span>Color</span><span>Negro / gris acero</span></div>
-            </div>
-
-            <span class="price">$000,000 MXN</span>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h3>Rines y accesorios</h3>
-        </div>
-        <p>
-          Espacio para mostrar rines, piezas personalizadas o accesorios destacados para motocicleta.
-        </p>
-      </div>
-
-      <div class="split-section">
-        <div class="info-box">
-          <h4>Rines personalizados</h4>
-          <p>
-            Muestra aquí los tipos de rines que vendes: cromados, negros mate, aluminio pulido,
-            diseño de radios, dobles o especiales para proyectos custom.
-          </p>
-
-          <div class="mini-list">
-            <div class="mini-item">
-              <strong>Rines cromados</strong>
-              <span>Para un estilo clásico brillante con presencia fuerte.</span>
-            </div>
-
-            <div class="mini-item">
-              <strong>Rines negros mate</strong>
-              <span>Ideales para motos de estética más agresiva y moderna.</span>
-            </div>
-
-            <div class="mini-item">
-              <strong>Rines de radios</strong>
-              <span>Perfectos para proyectos chopper tradicionales y restauraciones.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="products-grid">
-          <article class="product-card">
-            <div class="product-image" style="background-image: url('rin.jpg');">
-              <span class="badge">Rines</span>
-            </div>
-            <div class="product-body">
-              <h4>Rines estilo custom</h4>
-              <p>Opciones para personalizar la apariencia de la moto y reforzar su identidad.</p>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="product-image" style="background-image: url('https://http2.mlstatic.com/D_Q_NP_2X_851755-CBT100684365944_122025-P-casco-para-motocross-certificado-dot-con-gogles-y-regalos.webp');">
-              <span class="badge">Cascos</span>
-            </div>
-            <div class="product-body">
-              <h4>Cascos biker</h4>
-              <p>Diseños retro, agresivos o minimalistas para combinar con la personalidad de la moto.</p>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1608354580875-30bd4168b351?auto=format&fit=crop&w=1200&q=80');">
-              <span class="badge">Accesorios</span>
-            </div>
-            <div class="product-body">
-              <h4>Guantes y equipo</h4>
-              <p>Accesorios para comodidad, seguridad y un look más completo para el motociclista.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <h3>Productos de tienda</h3>
-        </div>
-        <p>
-          Aquí puedes listar otros productos que vendan en la tienda de motos, como piezas,
-          ropa, lubricantes, luces, espejos, escapes o artículos decorativos.
-        </p>
-      </div>
-
-      <div class="products-grid">
-        <article class="product-card">
-          <div class="product-image" style="background-image: url('https://img.freepik.com/foto-gratis/mujer-senior-alto-angulo-motocicleta_23-2150909375.jpg?semt=ais_hybrid&w=740&q=80');">
-            <span class="badge">Refacciones</span>
-          </div>
-          <div class="product-body">
-            <h4>Espejos y manubrios</h4>
-            <p>Componentes para renovar estética, postura de manejo y personalidad de la motocicleta.</p>
-          </div>
-        </article>
-
-        <article class="product-card">
-          <div class="product-image" style="background-image: url('https://www.bardahl.com.mx/wp-content/uploads/2016/10/Cambia-Aceite-Motocicleta.jpg');">
-            <span class="badge">Cuidado</span>
-          </div>
-          <div class="product-body">
-            <h4>Aceites y mantenimiento</h4>
-            <p>Lubricantes, productos de limpieza y consumibles para mantener la moto en gran estado.</p>
-          </div>
-        </article>
-      </div>
-
-      <div class="footer-note">
-        <h4>Hecho para vender motos con presencia</h4>
-        <p>
-          Este catálogo puede adaptarse con fotos reales de Hollywood Garage, modelos reales,
-          botones de WhatsApp, llamada, ubicación, precios, promociones y secciones para cotización.
-        </p>
-      </div>
-    </div>
-  </section>
 
 </body>
+
 </html>
